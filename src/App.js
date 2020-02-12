@@ -32,7 +32,7 @@ class App extends React.Component {
         <CounterTodo />
         <FilterTodo />
         <SearchTodo />
-        <TodoList todos={todoData}/>
+        <TodoList todos={todoData} />
       </div>
     )
   }
