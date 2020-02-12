@@ -3,6 +3,7 @@ import CounterTodo from "./CounterTodo"
 import FilterTodo from "./FilterTodo"
 import SearchTodo from "./SearchTodo"
 import TodoList from "./TodoList"
+import './style.scss'
 
 class App extends React.Component {
   idStart = 1
