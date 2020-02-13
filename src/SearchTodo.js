@@ -1,8 +1,28 @@
 import React from "react"
 
 class SearchTodo extends React.Component {
+  state = {
+    text: ""
+  }
+  onSearchItem = e => {
+    const text = e.target.value
+    this.setState({ text })
+    this.props.onSearchItem(text)
+  }
+
   render() {
-    return <div className="search-todo"></div>
+    const { text } = this.state
+    return (
+      <div className="search-todo">
+        <input
+          className="search-todo__input"
+          type="text"
+          placeholder="search todo..."
+          value={text}
+          onChange={this.onSearchItem}
+        />
+      </div>
+    )
   }
 }
 

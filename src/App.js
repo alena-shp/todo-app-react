@@ -15,7 +15,8 @@ class App extends React.Component {
       this.CreateItem("buy coffee"),
       this.CreateItem("order a book"),
       this.CreateItem("to water flowers")
-    ]
+    ],
+    text: ""
   }
 
   CreateItem(label) {
@@ -62,24 +63,36 @@ class App extends React.Component {
   onAddItem = text => {
     this.setState(({ todoData }) => {
       const newItem = this.CreateItem(text)
-      return { todoData: [...todoData, newItem]}
+      return { todoData: [...todoData, newItem] }
     })
   }
 
+  onSearchItem = text => {
+    this.setState({ text })
+  }
+
+  search(items, text) {
+    if (text.length === 0) {
+      return items
+    }
+    return items.filter(e => e.label.indexOf(text) > -1)
+  }
+
   render() {
-    const { todoData } = this.state
+    const { todoData, text } = this.state
+    const visibleItem = this.search(todoData, text)
 
     const counterDone = todoData.filter(e => e.done).length
     const counterNotDone = todoData.length - counterDone
     return (
       <div className="app">
         <h1 className="app__header">Todo List</h1>
-        <CounterTodo done={counterDone} notDone={counterNotDone}/>
+        <CounterTodo done={counterDone} notDone={counterNotDone} />
         <FilterTodo />
-        <SearchTodo />
+        <SearchTodo onSearchItem={this.onSearchItem} />
         <AddItem onAddItem={this.onAddItem} />
         <TodoList
-          todos={todoData}
+          todos={visibleItem}
           onToggleImportant={this.onToggleImportant}
           onToggleDone={this.onToggleDone}
           onItemDelete={this.onItemDelete}
