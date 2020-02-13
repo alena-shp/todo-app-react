@@ -16,7 +16,8 @@ class App extends React.Component {
       this.CreateItem("order a book"),
       this.CreateItem("to water flowers")
     ],
-    text: ""
+    text: "",
+    filter: "all"
   }
 
   CreateItem(label) {
@@ -78,9 +79,26 @@ class App extends React.Component {
     return items.filter(e => e.label.indexOf(text) > -1)
   }
 
+  filter(items, filter) {
+    switch (filter) {
+      case "all":
+        return items
+      case "active":
+        return items.filter(e => !e.done)
+      case "done":
+        return items.filter(e => e.done)
+      default:
+        return items
+    }
+  }
+
+  onFilterChange = filter => {
+    this.setState({ filter })
+  }
+
   render() {
-    const { todoData, text } = this.state
-    const visibleItem = this.search(todoData, text)
+    const { todoData, text, filter } = this.state
+    const visibleItem = this.filter(this.search(todoData, text), filter)
 
     const counterDone = todoData.filter(e => e.done).length
     const counterNotDone = todoData.length - counterDone
@@ -88,8 +106,10 @@ class App extends React.Component {
       <div className="app">
         <h1 className="app__header">Todo List</h1>
         <CounterTodo done={counterDone} notDone={counterNotDone} />
-        <FilterTodo />
-        <SearchTodo onSearchItem={this.onSearchItem} />
+        <div className="app__search-and-filter">
+          <SearchTodo onSearchItem={this.onSearchItem} />
+          <FilterTodo filter={filter} onFilterChange={this.onFilterChange} />
+        </div>
         <AddItem onAddItem={this.onAddItem} />
         <TodoList
           todos={visibleItem}
