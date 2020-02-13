@@ -1,4 +1,5 @@
 import React from "react"
+import classNames from "classnames"
 import "./style.scss"
 
 import deleteImg from "./assets/deleteImg.png"
@@ -11,13 +12,16 @@ const ItemTodo = ({
   onToggleImportant,
   onToggleDone
 }) => {
-  let classImportant = "item-todo__text"
-  if (important) {
-    classImportant += " active-text-important"
-  }
-  if (done) {
-    classImportant += " active-text-done"
-  }
+  let classImportant = classNames({
+    "item-todo__text": true,
+    "active-text-important": important,
+    "active-text-done": done
+  })
+
+  let classImportantBtn = classNames({
+    "item-todo__action-btn": true,
+    "active-btn": important
+  })
 
   return (
     <div className="item-todo">
@@ -25,10 +29,10 @@ const ItemTodo = ({
         {label}
       </span>
       <div className="item-todo__action">
-        <button onClick={onToggleImportant}>
+        <button onClick={onToggleImportant} className={classImportantBtn}>
           <img src={importantImg} alt="" />
         </button>
-        <button className="item-todo__action--delete">
+        <button className="item-todo__action-btn">
           <img src={deleteImg} alt="" />
         </button>
       </div>

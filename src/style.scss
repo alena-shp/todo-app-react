@@ -29,7 +29,7 @@
   }
 
   &__action {
-    button {
+    &-btn {
       border: 1px solid #1caae2;
       border-radius: 4px;
       margin-right: 10px;
@@ -40,10 +40,9 @@
       outline: none;
       transition: 0.2s;
 
-      &:hover,
-      &:active {
+      &:hover {
         border: 1px solid #1caae2;
-        background-color: #1caae2;
+        background-color: #8ed7f3;
       }
       img {
         padding: 0;
@@ -60,4 +59,13 @@
 
 .active-text-done {
   text-decoration: line-through;
+}
+
+.active-btn {
+  border: 1px solid #1caae2;
+  background-color: #1caae2;
+  &:hover {
+    border: 1px solid #1caae2;
+    background-color: #1caae2;
+  }
 }
