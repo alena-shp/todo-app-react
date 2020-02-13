@@ -11,9 +11,13 @@ class AddItem extends React.Component {
 
   onSubmitItem = e => {
     e.preventDefault()
-    this.props.onAddItem(this.state.label)
-    this.setState({ label: "" })
+    const label = this.state.label
+    if (label.length > 0) {
+      this.props.onAddItem(label)
+      this.setState({ label: "" })
+    }
   }
+
   render() {
     const { label } = this.state
     return (
@@ -24,7 +28,7 @@ class AddItem extends React.Component {
           value={label}
           onChange={this.onAddItem}
         />
-        <button>Add Todo</button>
+        <button className="add-item__btn">Add Todo</button>
       </form>
     )
   }

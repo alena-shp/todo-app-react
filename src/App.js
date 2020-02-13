@@ -62,7 +62,6 @@ class App extends React.Component {
   onAddItem = text => {
     this.setState(({ todoData }) => {
       const newItem = this.CreateItem(text)
-      console.log({ todoData: [...todoData, newItem]})
       return { todoData: [...todoData, newItem]}
     })
   }
