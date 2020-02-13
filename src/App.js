@@ -68,10 +68,13 @@ class App extends React.Component {
 
   render() {
     const { todoData } = this.state
+
+    const counterDone = todoData.filter(e => e.done).length
+    const counterNotDone = todoData.length - counterDone
     return (
       <div className="app">
         <h1 className="app__header">Todo List</h1>
-        <CounterTodo />
+        <CounterTodo done={counterDone} notDone={counterNotDone}/>
         <FilterTodo />
         <SearchTodo />
         <AddItem onAddItem={this.onAddItem} />

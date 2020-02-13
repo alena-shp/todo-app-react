@@ -27,6 +27,7 @@ class AddItem extends React.Component {
           className="add-item__input"
           value={label}
           onChange={this.onAddItem}
+          placeholder="write todo..."
         />
         <button className="add-item__btn">Add Todo</button>
       </form>
