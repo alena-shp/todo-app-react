@@ -48,6 +48,15 @@ class App extends React.Component {
     return [...arr.slice(0, idE), newItem, ...arr.slice(idE + 1)]
   }
 
+  onItemDelete = id => {
+    this.setState(({ todoData }) => {
+      const idE = todoData.findIndex(e => e.id === id)
+      return {
+        todoData: [...todoData.slice(0, idE), ...todoData.slice(idE + 1)]
+      }
+    })
+  }
+
   render() {
     const { todoData } = this.state
     return (
@@ -59,8 +68,8 @@ class App extends React.Component {
         <TodoList
           todos={todoData}
           onToggleImportant={this.onToggleImportant}
-          onToggleDelete={this.onToggleDelete}
           onToggleDone={this.onToggleDone}
+          onItemDelete={this.onItemDelete}
         />
       </div>
     )

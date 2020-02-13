@@ -10,16 +10,15 @@ const ItemTodo = ({
   done,
   important,
   onToggleImportant,
-  onToggleDone
+  onToggleDone,
+  onItemDelete
 }) => {
-  let classImportant = classNames({
-    "item-todo__text": true,
+  let classImportant = classNames("item-todo__text", {
     "active-text-important": important,
     "active-text-done": done
   })
 
-  let classImportantBtn = classNames({
-    "item-todo__action-btn": true,
+  let classImportantBtn = classNames("item-todo__action-btn", {
     "active-btn": important
   })
 
@@ -32,7 +31,7 @@ const ItemTodo = ({
         <button onClick={onToggleImportant} className={classImportantBtn}>
           <img src={importantImg} alt="" />
         </button>
-        <button className="item-todo__action-btn">
+        <button className="item-todo__action-btn" onClick={onItemDelete}>
           <img src={deleteImg} alt="" />
         </button>
       </div>
