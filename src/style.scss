@@ -24,6 +24,7 @@
   align-items: center;
   justify-content: space-between;
   &__text {
+    cursor: pointer;
     font-size: 24px;
   }
 
@@ -43,7 +44,6 @@
       &:active {
         border: 1px solid #1caae2;
         background-color: #1caae2;
-        outline: none;
       }
       img {
         padding: 0;
@@ -53,4 +53,11 @@
       }
     }
   }
+}
+.active-text-important {
+  color: rgb(117, 10, 10);
+}
+
+.active-text-done {
+  text-decoration: line-through;
 }

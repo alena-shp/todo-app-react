@@ -3,10 +3,10 @@ import CounterTodo from "./CounterTodo"
 import FilterTodo from "./FilterTodo"
 import SearchTodo from "./SearchTodo"
 import TodoList from "./TodoList"
-import './style.scss'
+import "./style.scss"
 
 class App extends React.Component {
-  idStart = 1
+  idStart = 100
 
   state = {
     todoData: [
@@ -15,6 +15,7 @@ class App extends React.Component {
       this.CreateItem("to water flowers")
     ]
   }
+
   CreateItem(label) {
     return {
       label,
@@ -22,6 +23,29 @@ class App extends React.Component {
       done: false,
       id: this.idStart++
     }
+  }
+
+  onToggleImportant = id => {
+    this.setState(({ todoData }) => {
+      return {
+        todoData: this.onToggleProps(todoData, id, "important")
+      }
+    })
+  }
+
+  onToggleDone = id => {
+    this.setState(({ todoData }) => {
+      return {
+        todoData: this.onToggleProps(todoData, id, "done")
+      }
+    })
+  }
+
+  onToggleProps = (arr, id, propsNeme) => {
+    const idE = arr.findIndex(e => e.id === id)
+    const oldItem = arr[idE]
+    const newItem = { ...oldItem, [propsNeme]: !oldItem[propsNeme] }
+    return [...arr.slice(0, idE), newItem, ...arr.slice(idE + 1)]
   }
 
   render() {
@@ -32,7 +56,12 @@ class App extends React.Component {
         <CounterTodo />
         <FilterTodo />
         <SearchTodo />
-        <TodoList todos={todoData} />
+        <TodoList
+          todos={todoData}
+          onToggleImportant={this.onToggleImportant}
+          onToggleDelete={this.onToggleDelete}
+          onToggleDone={this.onToggleDone}
+        />
       </div>
     )
   }
