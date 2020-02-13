@@ -1,4 +1,6 @@
 import React from "react"
+
+import AddItem from "./AddItem"
 import CounterTodo from "./CounterTodo"
 import FilterTodo from "./FilterTodo"
 import SearchTodo from "./SearchTodo"
@@ -57,6 +59,14 @@ class App extends React.Component {
     })
   }
 
+  onAddItem = text => {
+    this.setState(({ todoData }) => {
+      const newItem = this.CreateItem(text)
+      console.log({ todoData: [...todoData, newItem]})
+      return { todoData: [...todoData, newItem]}
+    })
+  }
+
   render() {
     const { todoData } = this.state
     return (
@@ -65,6 +75,7 @@ class App extends React.Component {
         <CounterTodo />
         <FilterTodo />
         <SearchTodo />
+        <AddItem onAddItem={this.onAddItem} />
         <TodoList
           todos={todoData}
           onToggleImportant={this.onToggleImportant}
